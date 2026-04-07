@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Micro Center — Your Passion, Our Parts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #0A0E17;
+  color: #E0E4EC;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+a { color: #4DA3FF; text-decoration: none; transition: color 0.3s; }
+a:hover { color: #0073DF; }
+img { max-width: 100%; display: block; }
+
+/* ===== UTILITY ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.section-subtitle {
+  text-align: center;
+  color: #8A92A6;
+  font-size: 1.05rem;
+  margin-bottom: 48px;
+  max-width: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.accent { color: #0073DF; }
+.red { color: #CC0000; }
+
+/* ===== FADE-IN ANIMATION ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ===== NAVBAR ===== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 0 24px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(10, 14, 23, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.navbar.scrolled {
+  background: rgba(10, 14, 23, 0.96);
+  box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+}
+.nav-logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.nav-logo .logo-icon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #0073DF, #0059AC);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #fff;
+}
+.nav-links { display: flex; gap: 32px; align-items: center; list-style: none; }
+.nav-links a {
+  color: #8A92A6;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #0073DF;
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: #fff; }
+.nav-links a:hover::after { width: 100%; }
+.nav-cta {
+  background: #0073DF;
+  color: #fff !important;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+.nav-cta::after { display: none !important; }
+.nav-cta:hover {
+  background: #0059AC;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(0,115,223,0.4);
+}
+
+/* Mobile menu toggle */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+.menu-toggle span {
+  width: 24px;
+  height: 2px;
+  background: #E0E4EC;
+  border-radius: 2px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.active span:nth-child(2) { opacity: 0; }
+.menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+/* ===== HERO ===== */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 120px 24px 80px;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,115,223,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 80%, rgba(204,0,0,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 10% 60%, rgba(0,89,172,0.08) 0%, transparent 50%);
+  z-index: 0;
+}
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black 20%, transparent 70%);
+}
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(0,115,223,0.5);
+  border-radius: 50%;
+  animation: float-particle linear infinite;
+}
+@keyframes float-particle {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+.hero-content { position: relative; z-index: 1; max-width: 800px; }
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0,115,223,0.1);
+  border: 1px solid rgba(0,115,223,0.25);
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #4DA3FF;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.hero-badge .pulse {
+  width: 8px;
+  height: 8px;
+  background: #0073DF;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0,115,223,0.6); }
+  50% { box-shadow: 0 0 0 8px rgba(0,115,223,0); }
+}
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  color: #fff;
+}
+.hero h1 .gradient-text {
+  background: linear-gradient(135deg, #0073DF 0%, #4DA3FF 50%, #0073DF 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s linear infinite;
+}
+@keyframes shimmer {
+  0% { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+.hero p {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #8A92A6;
+  max-width: 540px;
+  margin: 0 auto 40px;
+  line-height: 1.7;
+}
+.hero-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: inherit;
+  text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #0073DF, #0059AC);
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(0,115,223,0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,115,223,0.5);
+  color: #fff;
+}
+.btn-primary:active { transform: translateY(0); }
+.btn-secondary {
+  background: rgba(255,255,255,0.06);
+  color: #E0E4EC;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.btn-secondary:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.2);
+  transform: translateY(-2px);
+  color: #fff;
+}
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  margin-top: 64px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.hero-stat { text-align: center; }
+.hero-stat .number {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.hero-stat .label {
+  font-size: 0.8rem;
+  color: #5A6378;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* ===== CATEGORIES ===== */
+.categories { padding: 100px 0; position: relative; }
+.categories::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.cat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+.cat-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,115,223,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.cat-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,115,223,0.3);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,115,223,0.15);
+}
+.cat-card:hover::before { opacity: 1; }
+.cat-icon {
+  font-size: 2.4rem;
+  margin-bottom: 16px;
+  display: block;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cat-card:hover .cat-icon { transform: scale(1.15); }
+.cat-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+.cat-card p {
+  font-size: 0.85rem;
+  color: #5A6378;
+  position: relative;
+  z-index: 1;
+}
+.cat-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0,115,223,0.1);
+  color: #0073DF;
+  margin-top: 16px;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+  transition: all 0.3s;
+}
+.cat-card:hover .cat-arrow {
+  background: #0073DF;
+  color: #fff;
+  transform: translateX(4px);
+}
+
+/* ===== DEALS ===== */
+.deals { padding: 100px 0; position: relative; }
+.deals::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.deal-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.deal-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,115,223,0.3);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,115,223,0.15);
+}
+.deal-image {
+  height: 180px;
+  background: linear-gradient(135deg, #0D1220 0%, #141B2D 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  position: relative;
+  overflow: hidden;
+}
+.deal-image::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(to top, rgba(10,14,23,1), transparent);
+}
+.deal-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #CC0000;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  z-index: 1;
+}
+.deal-info { padding: 20px; }
+.deal-brand {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #0073DF;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.deal-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+  line-height: 1.4;
+}
+.deal-pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.deal-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+}
+.deal-original {
+  font-size: 0.85rem;
+  color: #5A6378;
+  text-decoration: line-through;
+}
+.deal-btn {
+  width: 100%;
+  padding: 12px;
+  background: rgba(0,115,223,0.1);
+  border: 1px solid rgba(0,115,223,0.2);
+  color: #4DA3FF;
+  font-weight: 700;
+  font-size: 0.85rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.deal-btn:hover {
+  background: #0073DF;
+  border-color: #0073DF;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0,115,223,0.3);
+}
+
+/* ===== WHY MICRO CENTER ===== */
+.why { padding: 100px 0; position: relative; }
+.why::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.why-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 16px;
+  padding: 40px 32px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,115,223,0.2);
+  background: rgba(255,255,255,0.05);
+}
+.why-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  margin: 0 auto 20px;
+  transition: transform 0.4s;
+}
+.why-card:hover .why-icon { transform: scale(1.1); }
+.why-icon.blue { background: rgba(0,115,223,0.12); }
+.why-icon.red { background: rgba(204,0,0,0.12); }
+.why-icon.green { background: rgba(0,200,120,0.12); }
+.why-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.why-card p {
+  font-size: 0.9rem;
+  color: #5A6378;
+  line-height: 1.7;
+}
+
+/* ===== CUSTOM PC BUILDER CTA ===== */
+.builder-cta {
+  padding: 100px 0;
+  position: relative;
+}
+.builder-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.builder-banner {
+  background: linear-gradient(135deg, #0D1220 0%, #0A1628 50%, #0D1220 100%);
+  border: 1px solid rgba(0,115,223,0.15);
+  border-radius: 24px;
+  padding: 72px 48px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.builder-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 50% 80% at 20% 50%, rgba(0,115,223,0.1) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 80% at 80% 50%, rgba(204,0,0,0.05) 0%, transparent 60%);
+}
+.builder-banner > * { position: relative; z-index: 1; }
+.builder-icon {
+  font-size: 3rem;
+  margin-bottom: 24px;
+  display: block;
+}
+.builder-banner h2 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+}
+.builder-banner p {
+  font-size: 1.05rem;
+  color: #8A92A6;
+  max-width: 520px;
+  margin: 0 auto 36px;
+  line-height: 1.7;
+}
+.builder-features {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+.builder-feature {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #8A92A6;
+}
+.builder-feature .check {
+  color: #0073DF;
+  font-weight: 700;
+}
+
+/* ===== NEWSLETTER ===== */
+.newsletter {
+  padding: 100px 0;
+  position: relative;
+}
+.newsletter::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+}
+.newsletter-box {
+  max-width: 560px;
+  margin: 0 auto;
+  text-align: center;
+}
+.newsletter-box h2 {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+}
+.newsletter-box p {
+  color: #5A6378;
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+.newsletter-form {
+  display: flex;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.newsletter-form input {
+  flex: 1;
+  padding: 14px 20px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: #fff;
+  font-size: 0.92rem;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.newsletter-form input::placeholder { color: #3D4556; }
+.newsletter-form input:focus {
+  border-color: rgba(0,115,223,0.5);
+  box-shadow: 0 0 0 3px rgba(0,115,223,0.1);
+}
+.newsletter-form button {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #0073DF, #0059AC);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.newsletter-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,115,223,0.4);
+}
+.newsletter-note {
+  font-size: 0.75rem;
+  color: #3D4556;
+  margin-top: 16px;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  padding: 64px 0 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+.footer-brand p {
+  color: #3D4556;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  line-height: 1.7;
+  max-width: 280px;
+}
+.footer-socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+.social-link {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: #5A6378;
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.social-link:hover {
+  background: rgba(0,115,223,0.15);
+  border-color: rgba(0,115,223,0.3);
+  color: #4DA3FF;
+  transform: translateY(-2px);
+}
+.footer-col h4 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; }
+.footer-col li { margin-bottom: 10px; }
+.footer-col a {
+  font-size: 0.88rem;
+  color: #5A6378;
+  transition: color 0.3s;
+}
+.footer-col a:hover { color: #4DA3FF; }
+.footer-bottom {
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+.footer-bottom p {
+  font-size: 0.8rem;
+  color: #3D4556;
+}
+.footer-bottom-links {
+  display: flex;
+  gap: 24px;
+}
+.footer-bottom-links a {
+  font-size: 0.8rem;
+  color: #3D4556;
+}
+.footer-bottom-links a:hover { color: #5A6378; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .deals-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 768px) {
+  .menu-toggle { display: flex; }
+  .nav-links {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 14, 23, 0.98);
+    backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .nav-links.open { transform: translateX(0); }
+  .nav-links a { font-size: 1.1rem; }
+  .cat-grid { grid-template-columns: repeat(2, 1fr); }
+  .deals-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .why-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .builder-banner { padding: 48px 24px; }
+  .builder-features { flex-direction: column; align-items: center; gap: 12px; }
+  .newsletter-form { flex-direction: column; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
+@media (max-width: 480px) {
+  .cat-grid { grid-template-columns: 1fr; max-width: 340px; margin: 0 auto; }
+  .hero-stats { flex-direction: column; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-logo">
+    <div class="logo-icon">M</div>
+    Micro Center
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#categories">Shop</a></li>
+    <li><a href="#deals">Deals</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#builder">Build</a></li>
+    <li><a href="#deals" class="nav-cta">Shop Now</a></li>
+  </ul>
+  <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-particles" id="heroParticles"></div>
+  <div class="hero-content">
+    <div class="hero-badge reveal"><span class="pulse"></span> Now Open — 29 Locations Nationwide</div>
+    <h1 class="reveal reveal-delay-1">Your Passion,<br><span class="gradient-text">Our Parts.</span></h1>
+    <p class="reveal reveal-delay-2">From bleeding-edge GPUs to full custom builds — everything a tech enthusiast needs, backed by real experts in-store and online.</p>
+    <div class="hero-buttons reveal reveal-delay-3">
+      <a href="#deals" class="btn btn-primary">Shop Top Deals &#8594;</a>
+      <a href="#builder" class="btn btn-secondary">&#9881;&#65039; Build Your PC</a>
+    </div>
+    <div class="hero-stats reveal reveal-delay-4">
+      <div class="hero-stat">
+        <div class="number">29+</div>
+        <div class="label">Locations</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">40K+</div>
+        <div class="label">Products</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">4.8&#9733;</div>
+        <div class="label">Rating</div>
+      </div>
+      <div class="hero-stat">
+        <div class="number">18min</div>
+        <div class="label">Pickup</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES -->
+<section class="categories" id="categories">
+  <div class="container">
+    <h2 class="section-title reveal">Shop by <span class="accent">Category</span></h2>
+    <p class="section-subtitle reveal reveal-delay-1">From core components to complete systems — find exactly what powers your next project.</p>
+    <div class="cat-grid">
+      <div class="cat-card reveal reveal-delay-1">
+        <span class="cat-icon">&#9889;</span>
+        <h3>Processors</h3>
+        <p>Intel & AMD — latest gen, in stock</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-2">
+        <span class="cat-icon">&#127918;</span>
+        <h3>Graphics Cards</h3>
+        <p>RTX, Radeon — MSRP, no scalpers</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-3">
+        <span class="cat-icon">&#128187;</span>
+        <h3>Laptops</h3>
+        <p>Gaming, ultrabook, workstation</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-4">
+        <span class="cat-icon">&#128421;</span>
+        <h3>Desktops</h3>
+        <p>Pre-built rigs, ready to dominate</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+      <div class="cat-card reveal reveal-delay-5">
+        <span class="cat-icon">&#128424;</span>
+        <h3>Monitors</h3>
+        <p>4K, ultrawide, 240Hz+ panels</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+      <div class="cat-card reveal">
+        <span class="cat-icon">&#128295;</span>
+        <h3>Custom PC Builder</h3>
+        <p>Pick every part, we assemble it</p>
+        <div class="cat-arrow">&#8594;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEALS -->
+<section class="deals" id="deals">
+  <div class="container">
+    <h2 class="section-title reveal">Today's <span class="red">Top Deals</span></h2>
+    <p class="section-subtitle reveal reveal-delay-1">Limited-time prices on the hardware you've been watching. Don't sleep on these.</p>
+    <div class="deals-grid">
+      <div class="deal-card reveal reveal-delay-1">
+        <div class="deal-image">
+          <span class="deal-badge">SAVE $120</span>
+          &#9889;
+        </div>
+        <div class="deal-info">
+          <div class="deal-brand">AMD</div>
+          <div class="deal-name">Ryzen 9 7950X3D Processor</div>
+          <div class="deal-pricing">
+            <span class="deal-price">$549</span>
+            <span class="deal-original">$669</span>
+          </div>
+          <button class="deal-btn">&#128722; Add to Cart</button>
+        </div>
+      </div>
+      <div class="deal-card reveal reveal-delay-2">
+        <div class="deal-image">
+          <span class="deal-badge">SAVE $200</span>
+          &#127918;
+        </div>
+        <div class="deal-info">
+          <div class="deal-brand">NVIDIA</div>
+          <div class="deal-name">GeForce RTX 4080 SUPER 16GB</div>
+          <div class="deal-pricing">
+            <span class="deal-price">$799</span>
+            <span class="deal-original">$999</span>
+          </div>
+          <button class="deal-btn">&#128722; Add to Cart</button>
+        </div>
+      </div>
+      <div class="deal-card reveal reveal-delay-3">
+        <div class="deal-image">
+          <span class="deal-badge">SAVE $150</span>
+          &#128424;
+        </div>
+        <div class="deal-info">
+          <div class="deal-brand">Samsung</div>
+          <div class="deal-name">Odyssey G9 49" DQHD 240Hz</div>
+          <div class="deal-pricing">
+            <span class="deal-price">$899</span>
+            <span class="deal-original">$1,049</span>
+          </div>
+          <button class="deal-btn">&#128722; Add to Cart</button>
+        </div>
+      </div>
+      <div class="deal-card reveal reveal-delay-4">
+        <div class="deal-image">
+          <span class="deal-badge">SAVE $300</span>
+          &#128187;
+        </div>
+        <div class="deal-info">
+          <div class="deal-brand">ASUS</div>
+          <div class="deal-name">ROG Zephyrus G16 RTX 4070</div>
+          <div class="deal-pricing">
+            <span class="deal-price">$1,399</span>
+            <span class="deal-original">$1,699</span>
+          </div>
+          <button class="deal-btn">&#128722; Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY MICRO CENTER -->
+<section class="why" id="why">
+  <div class="container">
+    <h2 class="section-title reveal">Why <span class="accent">Micro Center</span>?</h2>
+    <p class="section-subtitle reveal reveal-delay-1">We're not just another retailer. We're built by enthusiasts, for enthusiasts.</p>
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-icon blue">&#9889;</div>
+        <h3>18-Minute In-Store Pickup</h3>
+        <p>Order online, grab it on your way home. Most orders ready in 18 minutes or less — no waiting, no shipping anxiety.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-2">
+        <div class="why-icon red">&#128736;</div>
+        <h3>Expert Technicians</h3>
+        <p>Our associates are builders, overclockers, and engineers — not script readers. Real advice from people who live and breathe tech.</p>
+      </div>
+      <div class="why-card reveal reveal-delay-3">
+        <div class="why-icon green">&#9989;</div>
+        <h3>Price Match Guarantee</h3>
+        <p>Found it cheaper? We'll match it. No hoops, no hassle. We're committed to giving you the best deal — period.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CUSTOM PC BUILDER CTA -->
+<section class="builder-cta" id="builder">
+  <div class="container">
+    <div class="builder-banner reveal">
+      <span class="builder-icon">&#128296;</span>
+      <h2>Build Your Dream Machine</h2>
+      <p>Use our Custom PC Builder to pick every component, check compatibility in real-time, and have our technicians assemble it — with a warranty.</p>
+      <div class="builder-features">
+        <div class="builder-feature"><span class="check">&#10003;</span> Real-time compatibility</div>
+        <div class="builder-feature"><span class="check">&#10003;</span> Expert assembly</div>
+        <div class="builder-feature"><span class="check">&#10003;</span> 2-year warranty</div>
+        <div class="builder-feature"><span class="check">&#10003;</span> Free cable management</div>
+      </div>
+      <a href="#" class="btn btn-primary">Start Your Build &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter" id="newsletter">
+  <div class="container">
+    <div class="newsletter-box">
+      <h2 class="reveal">Stay in the <span class="accent">Loop</span></h2>
+      <p class="reveal reveal-delay-1">Get exclusive deals, new product drops, and tech tips delivered straight to your inbox.</p>
+      <form class="newsletter-form reveal reveal-delay-2" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit" class="btn btn-primary">Subscribe</button>
+      </form>
+      <p class="newsletter-note reveal reveal-delay-3">No spam. Unsubscribe anytime. We respect your inbox.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom: 4px;">
+          <div class="logo-icon">M</div>
+          Micro Center
+        </div>
+        <p>America's #1 destination for computer and tech enthusiasts since 1979. 29 locations and counting.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-link" aria-label="Twitter">&#120143;</a>
+          <a href="#" class="social-link" aria-label="Facebook">f</a>
+          <a href="#" class="social-link" aria-label="Instagram">&#9679;</a>
+          <a href="#" class="social-link" aria-label="YouTube">&#9654;</a>
+          <a href="#" class="social-link" aria-label="Discord">D</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">Processors</a></li>
+          <li><a href="#">Graphics Cards</a></li>
+          <li><a href="#">Laptops</a></li>
+          <li><a href="#">Desktops</a></li>
+          <li><a href="#">Monitors</a></li>
+          <li><a href="#">Accessories</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Custom PC Builder</a></li>
+          <li><a href="#">Repairs</a></li>
+          <li><a href="#">Trade-In</a></li>
+          <li><a href="#">Business Solutions</a></li>
+          <li><a href="#">Apple Authorized</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">Store Locator</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Micro Center. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ===== NAVBAR SCROLL EFFECT =====
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ===== MOBILE MENU =====
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+menuToggle.addEventListener('click', () => {
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('open');
+  });
+});
+
+// ===== SCROLL REVEAL (IntersectionObserver) =====
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// ===== HERO PARTICLES =====
+const particleContainer = document.getElementById('heroParticles');
+for (let i = 0; i < 30; i++) {
+  const p = document.createElement('div');
+  p.classList.add('particle');
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDuration = (8 + Math.random() * 12) + 's';
+  p.style.animationDelay = (Math.random() * 10) + 's';
+  p.style.width = p.style.height = (2 + Math.random() * 3) + 'px';
+  if (Math.random() > 0.6) p.style.background = 'rgba(204,0,0,0.3)';
+  particleContainer.appendChild(p);
+}
+
+// ===== NEWSLETTER SUBSCRIBE =====
+function handleSubscribe(e) {
+  e.preventDefault();
+  const input = e.target.querySelector('input');
+  const btn = e.target.querySelector('button');
+  const email = input.value;
+  btn.textContent = 'Subscribed!';
+  btn.style.background = '#00C878';
+  input.value = '';
+  setTimeout(() => {
+    btn.textContent = 'Subscribe';
+    btn.style.background = '';
+  }, 3000);
+}
+
+// ===== ADD-TO-CART MICRO-INTERACTION =====
+document.querySelectorAll('.deal-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const original = this.innerHTML;
+    this.innerHTML = '&#10003; Added!';
+    this.style.background = '#00C878';
+    this.style.borderColor = '#00C878';
+    this.style.color = '#fff';
+    setTimeout(() => {
+      this.innerHTML = original;
+      this.style.background = '';
+      this.style.borderColor = '';
+      this.style.color = '';
+    }, 2000);
+  });
+});
+</script>
+</body>
+</html>
