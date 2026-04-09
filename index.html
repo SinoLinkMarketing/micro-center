@@ -4,7 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Micro Center — Your Passion, Our Parts</title>
-<link rel="icon" href="https://www.microcenter.com/favicon.ico" type="image/x-icon">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -54,7 +55,8 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
 /* ===== 2. MAIN NAV ===== */
 .main-nav{background:#0073DF;position:sticky;top:0;z-index:1000;box-shadow:0 2px 12px rgba(0,0,0,.15);transition:box-shadow .3s}
 .main-nav .container{display:flex;align-items:center;justify-content:space-between;height:56px;gap:16px}
-.nav-logo img{height:28px;width:auto;filter:brightness(0) invert(1)}
+.nav-logo svg{height:28px;width:auto}
+.footer-brand svg{height:22px;width:auto}
 .nav-center{display:flex;gap:4px;align-items:center}
 .nav-center a{color:rgba(255,255,255,.9);font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:6px;transition:background .2s,color .2s;position:relative}
 .nav-center a:hover{background:rgba(255,255,255,.15);color:#fff}
@@ -229,7 +231,11 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
 <nav class="main-nav" id="mainNav">
   <div class="container">
     <a href="#" class="nav-logo">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Micro_Center_logo.svg/1200px-Micro_Center_logo.svg.png" alt="Micro Center">
+      <svg viewBox="0 0 520 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Micro Center">
+        <text x="0" y="62" font-family="'Plus Jakarta Sans','Inter',Arial,sans-serif" font-size="68" font-weight="800" fill="#fff" letter-spacing="-2">
+          <tspan>micro</tspan><tspan dx="8" fill="#fff">center</tspan>
+        </text>
+      </svg>
     </a>
     <div class="nav-center" id="navCenter">
       <a href="#categories">Computers</a>
@@ -548,7 +554,11 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Micro_Center_logo.svg/1200px-Micro_Center_logo.svg.png" alt="Micro Center">
+        <svg viewBox="0 0 520 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Micro Center">
+          <text x="0" y="62" font-family="'Plus Jakarta Sans','Inter',Arial,sans-serif" font-size="68" font-weight="800" fill="#fff" letter-spacing="-2">
+            <tspan>micro</tspan><tspan dx="8" fill="#fff">center</tspan>
+          </text>
+        </svg>
         <p>America's #1 destination for computer and tech enthusiasts since 1979. 29 locations and counting.</p>
         <div class="footer-socials">
           <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
