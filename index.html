@@ -74,21 +74,27 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
 .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
 
 /* ===== 3. EXPLODING PC HERO ===== */
-.explode-wrapper{height:300vh;position:relative;z-index:1}
-.explode-hero{position:sticky;top:0;height:100vh;width:100%;display:flex;align-items:center;justify-content:center;background:#0a0a0a;overflow:hidden}
-.explode-scene{position:relative;width:680px;height:480px;perspective:1200px;transform-style:preserve-3d}
-.explode-part{position:absolute;will-change:transform,opacity;filter:drop-shadow(0 4px 24px rgba(0,115,223,.15))}
+.explode-wrapper{height:400vh;position:relative;z-index:1}
+.explode-hero{position:sticky;top:0;height:100vh;width:100%;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 50% 40%,#0d1117 0%,#060809 60%,#000 100%);overflow:hidden}
+.explode-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(0,115,223,.04) 0%,transparent 60%);pointer-events:none;transition:opacity .3s}
+.explode-hero::after{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.015'/%3E%3C/svg%3E");opacity:.5;pointer-events:none}
+.explode-scene{position:relative;width:700px;height:520px;perspective:1400px;transform-style:preserve-3d}
+.explode-part{position:absolute;will-change:transform,opacity;filter:drop-shadow(0 4px 32px rgba(0,115,223,.12));transition:filter .3s}
 .explode-part svg{width:100%;height:100%}
-.explode-label{position:absolute;opacity:0;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;font-size:.8rem;font-weight:600;color:#fff;letter-spacing:.3px;pointer-events:none;will-change:opacity;text-shadow:0 2px 10px rgba(0,0,0,.7)}
-.explode-label .spec{color:#0073DF;font-family:'Inter',sans-serif;font-weight:500;font-size:.72rem}
+.explode-label{position:absolute;opacity:0;white-space:nowrap;font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:600;color:#fff;letter-spacing:.4px;pointer-events:none;will-change:opacity;text-shadow:0 2px 12px rgba(0,0,0,.8);background:linear-gradient(90deg,rgba(0,115,223,.08),transparent);padding:4px 10px 4px 8px;border-left:2px solid rgba(0,115,223,.5);border-radius:0 4px 4px 0}
+.explode-label .spec{color:#4da6ff;font-family:'Inter',sans-serif;font-weight:500;font-size:.68rem;display:block;margin-top:1px}
 .hero-bottom-cta{position:absolute;bottom:48px;left:0;right:0;text-align:center;z-index:10;opacity:0;transition:opacity .5s;pointer-events:none}
 .hero-bottom-cta.show{opacity:1;pointer-events:auto}
-.hero-bottom-cta h2{font-family:'Plus Jakarta Sans',sans-serif;color:#fff;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:16px}
+.hero-bottom-cta h2{font-family:'Plus Jakarta Sans',sans-serif;color:#fff;font-size:clamp(1.4rem,3vw,2rem);font-weight:800;margin-bottom:16px;text-shadow:0 2px 20px rgba(0,0,0,.5)}
 .hero-bottom-cta .btn-white{display:inline-flex;align-items:center;gap:8px;padding:14px 36px;background:#fff;color:#0073DF;font-weight:700;font-size:.95rem;border-radius:10px;border:none;transition:transform .2s,box-shadow .2s}
 .hero-bottom-cta .btn-white:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,115,223,.3)}
-.scroll-hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:10;color:rgba(255,255,255,.35);font-size:.7rem;font-weight:500;text-transform:uppercase;letter-spacing:2px;animation:bob 2s ease-in-out infinite}
-.scroll-hint::after{content:'';display:block;width:1px;height:28px;background:linear-gradient(to bottom,rgba(255,255,255,.35),transparent);margin:8px auto 0}
-@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+.scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;color:rgba(255,255,255,.3);font-size:.65rem;font-weight:500;text-transform:uppercase;letter-spacing:2.5px;animation:bob 2.5s ease-in-out infinite}
+.scroll-hint .scroll-arrow{width:20px;height:20px;border-right:1.5px solid rgba(255,255,255,.25);border-bottom:1.5px solid rgba(255,255,255,.25);transform:rotate(45deg);animation:scrollPulse 2.5s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes scrollPulse{0%,100%{opacity:.25}50%{opacity:.6}}
+.hero-title{position:absolute;top:clamp(40px,8vh,80px);left:50%;transform:translateX(-50%);z-index:10;text-align:center;pointer-events:none;will-change:opacity}
+.hero-title h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:300;color:rgba(255,255,255,.5);letter-spacing:4px;text-transform:uppercase;margin-bottom:4px}
+.hero-title .hero-tagline{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(.7rem,1.2vw,.85rem);font-weight:400;color:rgba(255,255,255,.2);letter-spacing:1.5px}
 
 /* ===== 4. CATEGORIES ===== */
 .categories{padding:80px 0;position:relative;z-index:1;background:#fff}
@@ -175,7 +181,8 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
   .builder-banner{flex-direction:column;text-align:center;padding:48px 32px}
   .builder-text{max-width:100%}
   .builder-graphic{display:none}
-  .explode-scene{width:480px;height:360px}
+  .explode-scene{width:500px;height:400px}
+  .explode-wrapper{height:350vh}
 }
 @media(max-width:768px){
   .hamburger{display:flex}
@@ -188,9 +195,9 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
   .services-grid{grid-template-columns:1fr;max-width:380px;margin:0 auto}
   .footer-top{grid-template-columns:1fr;gap:28px}
   .footer-bottom{flex-direction:column;text-align:center}
-  .explode-scene{width:320px;height:260px}
-  .explode-wrapper{height:200vh}
-  .explode-label{font-size:.65rem}
+  .explode-scene{width:320px;height:280px}
+  .explode-wrapper{height:250vh}
+  .explode-label{font-size:.6rem;padding:3px 8px 3px 6px}
   .utility-bar .container{flex-direction:column;gap:4px;text-align:center}
   .utility-right{justify-content:center}
 }
@@ -253,157 +260,312 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
 <!-- ===== 3. EXPLODING PC HERO ===== -->
 <div class="explode-wrapper" id="explodeWrapper">
   <section class="explode-hero" id="explodeHero">
+
+    <div class="hero-title" id="heroTitle">
+      <h1>Anatomy of a Build</h1>
+      <div class="hero-tagline">Scroll to disassemble</div>
+    </div>
+
     <div class="explode-scene" id="explodeScene">
 
-      <!-- PC CASE -->
-      <div class="explode-part" id="part-case" style="left:50%;top:50%;width:200px;height:300px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 200 300" fill="none">
-          <defs><linearGradient id="gc" x1="0" y1="0" x2="200" y2="300" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="4" y="4" width="192" height="292" rx="8" fill="url(#gc)" stroke="#0073DF" stroke-width="1.5"/>
-          <rect x="14" y="14" width="172" height="190" rx="4" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <rect x="14" y="216" width="172" height="68" rx="4" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <circle cx="100" cy="236" r="7" fill="none" stroke="#0073DF" stroke-width="1.2"/><circle cx="100" cy="236" r="2.5" fill="#0073DF" opacity=".4"/>
-          <rect x="76" y="254" width="12" height="5" rx="1.5" fill="none" stroke="#555" stroke-width=".7"/>
-          <rect x="94" y="254" width="12" height="5" rx="1.5" fill="none" stroke="#555" stroke-width=".7"/>
-          <rect x="112" y="254" width="12" height="5" rx="1.5" fill="none" stroke="#555" stroke-width=".7"/>
-          <rect x="22" y="22" width="156" height="20" rx="2" fill="none" stroke="#3a3a4e" stroke-width=".6"/>
-          <rect x="22" y="48" width="156" height="20" rx="2" fill="none" stroke="#3a3a4e" stroke-width=".6"/>
-          <line x1="22" y1="78" x2="178" y2="78" stroke="#2a2a3e" stroke-width=".4"/>
-          <line x1="22" y1="84" x2="178" y2="84" stroke="#2a2a3e" stroke-width=".4"/>
-          <line x1="22" y1="90" x2="178" y2="90" stroke="#2a2a3e" stroke-width=".4"/>
-          <rect x="28" y="100" width="144" height="90" rx="3" fill="none" stroke="#0073DF" stroke-width=".4" opacity=".25"/>
+      <!-- CASE FRAME (rear shell) -->
+      <div class="explode-part" id="part-case" style="left:50%;top:50%;width:220px;height:320px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 220 320" fill="none">
+          <defs>
+            <linearGradient id="gc" x1="0" y1="0" x2="220" y2="320" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#141420"/><stop offset="100%" stop-color="#1c1c2e"/></linearGradient>
+            <linearGradient id="gcEdge" x1="0" y1="0" x2="0" y2="320" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#333"/><stop offset="100%" stop-color="#1a1a2a"/></linearGradient>
+          </defs>
+          <rect x="4" y="4" width="212" height="312" rx="6" fill="url(#gc)" stroke="url(#gcEdge)" stroke-width="1.5"/>
+          <!-- top ventilation -->
+          <rect x="20" y="12" width="180" height="4" rx="2" fill="#1a1a28" stroke="#2a2a3a" stroke-width=".4"/>
+          <rect x="20" y="20" width="180" height="4" rx="2" fill="#1a1a28" stroke="#2a2a3a" stroke-width=".4"/>
+          <rect x="20" y="28" width="180" height="4" rx="2" fill="#1a1a28" stroke="#2a2a3a" stroke-width=".4"/>
+          <!-- internal bays -->
+          <rect x="16" y="40" width="188" height="200" rx="3" fill="none" stroke="#222238" stroke-width=".6"/>
+          <line x1="16" y1="80" x2="204" y2="80" stroke="#1e1e30" stroke-width=".4"/>
+          <line x1="16" y1="140" x2="204" y2="140" stroke="#1e1e30" stroke-width=".4"/>
+          <line x1="16" y1="190" x2="204" y2="190" stroke="#1e1e30" stroke-width=".4"/>
+          <!-- PSU bay bottom -->
+          <rect x="16" y="248" width="188" height="60" rx="3" fill="none" stroke="#222238" stroke-width=".6"/>
+          <line x1="16" y1="248" x2="204" y2="248" stroke="#2a2a3e" stroke-width=".8"/>
+          <!-- rear I/O cutouts -->
+          <rect x="186" y="50" width="22" height="38" rx="2" fill="#0e0e18" stroke="#2a2a3e" stroke-width=".4"/>
+          <rect x="186" y="96" width="22" height="8" rx="1" fill="#0e0e18" stroke="#2a2a3e" stroke-width=".4"/>
+          <rect x="186" y="110" width="22" height="8" rx="1" fill="#0e0e18" stroke="#2a2a3e" stroke-width=".4"/>
+          <rect x="186" y="124" width="22" height="8" rx="1" fill="#0e0e18" stroke="#2a2a3e" stroke-width=".4"/>
+          <!-- feet -->
+          <rect x="30" y="308" width="24" height="8" rx="4" fill="#1a1a28" stroke="#333" stroke-width=".5"/>
+          <rect x="166" y="308" width="24" height="8" rx="4" fill="#1a1a28" stroke="#333" stroke-width=".5"/>
+          <!-- front panel button -->
+          <circle cx="110" cy="260" r="5" fill="none" stroke="#0073DF" stroke-width="1" opacity=".5"/>
+          <circle cx="110" cy="260" r="2" fill="#0073DF" opacity=".2"/>
+          <!-- USB ports -->
+          <rect x="88" y="274" width="10" height="4" rx="1" fill="none" stroke="#444" stroke-width=".5"/>
+          <rect x="102" y="274" width="10" height="4" rx="1" fill="none" stroke="#444" stroke-width=".5"/>
+          <rect x="116" y="274" width="10" height="4" rx="1" fill="none" stroke="#444" stroke-width=".5"/>
         </svg>
       </div>
 
-      <!-- GPU -->
-      <div class="explode-part" id="part-gpu" style="left:50%;top:50%;width:190px;height:85px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 190 85" fill="none">
-          <defs><linearGradient id="gg" x1="0" y1="0" x2="190" y2="85" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="3" y="3" width="184" height="64" rx="5" fill="url(#gg)" stroke="#0073DF" stroke-width="1.5"/>
-          <circle cx="46" cy="35" r="20" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <circle cx="46" cy="35" r="7" fill="none" stroke="#444" stroke-width=".6"/>
-          <circle cx="46" cy="35" r="2.5" fill="#0073DF" opacity=".25"/>
-          <circle cx="124" cy="35" r="20" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <circle cx="124" cy="35" r="7" fill="none" stroke="#444" stroke-width=".6"/>
-          <circle cx="124" cy="35" r="2.5" fill="#0073DF" opacity=".25"/>
-          <line x1="162" y1="10" x2="162" y2="60" stroke="#444" stroke-width="1.2"/>
-          <line x1="170" y1="10" x2="170" y2="60" stroke="#444" stroke-width="1.2"/>
-          <line x1="178" y1="10" x2="178" y2="60" stroke="#444" stroke-width="1.2"/>
-          <rect x="10" y="67" width="72" height="11" rx="2" fill="none" stroke="#444" stroke-width=".8"/>
-          <line x1="3" y1="3" x2="187" y2="3" stroke="#0073DF" stroke-width=".4" opacity=".5"/>
+      <!-- GLASS SIDE PANEL -->
+      <div class="explode-part" id="part-glass" style="left:50%;top:50%;width:210px;height:290px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 210 290" fill="none">
+          <defs>
+            <linearGradient id="ggl" x1="0" y1="0" x2="210" y2="290" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="rgba(255,255,255,.04)"/><stop offset="50%" stop-color="rgba(255,255,255,.01)"/><stop offset="100%" stop-color="rgba(255,255,255,.06)"/></linearGradient>
+          </defs>
+          <rect x="4" y="4" width="202" height="282" rx="5" fill="url(#ggl)" stroke="rgba(255,255,255,.12)" stroke-width="1"/>
+          <!-- glass reflections -->
+          <line x1="30" y1="4" x2="4" y2="60" stroke="rgba(255,255,255,.04)" stroke-width="1.5"/>
+          <line x1="80" y1="4" x2="30" y2="120" stroke="rgba(255,255,255,.03)" stroke-width="1"/>
+          <line x1="160" y1="4" x2="90" y2="200" stroke="rgba(255,255,255,.02)" stroke-width=".8"/>
+          <!-- corner screws -->
+          <circle cx="14" cy="14" r="3" fill="none" stroke="rgba(255,255,255,.08)" stroke-width=".6"/>
+          <circle cx="196" cy="14" r="3" fill="none" stroke="rgba(255,255,255,.08)" stroke-width=".6"/>
+          <circle cx="14" cy="276" r="3" fill="none" stroke="rgba(255,255,255,.08)" stroke-width=".6"/>
+          <circle cx="196" cy="276" r="3" fill="none" stroke="rgba(255,255,255,.08)" stroke-width=".6"/>
         </svg>
-        <div class="explode-label" style="right:210px;top:50%;transform:translateY(-50%);text-align:right">RTX 4090 <span class="spec">— 24GB GDDR6X</span></div>
+        <div class="explode-label" style="left:-160px;top:50%;transform:translateY(-50%);text-align:right">Tempered Glass<span class="spec">4mm Tinted Panel</span></div>
+      </div>
+
+      <!-- GPU (triple-fan, large) -->
+      <div class="explode-part" id="part-gpu" style="left:50%;top:50%;width:200px;height:90px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 200 90" fill="none">
+          <defs>
+            <linearGradient id="gg" x1="0" y1="0" x2="200" y2="90" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#151525"/><stop offset="100%" stop-color="#1e1e30"/></linearGradient>
+            <linearGradient id="ggAccent" x1="0" y1="0" x2="200" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0073DF" stop-opacity=".6"/><stop offset="100%" stop-color="#0073DF" stop-opacity=".1"/></linearGradient>
+          </defs>
+          <!-- shroud -->
+          <rect x="3" y="3" width="194" height="68" rx="5" fill="url(#gg)" stroke="#2a2a40" stroke-width="1.2"/>
+          <line x1="3" y1="4" x2="197" y2="4" stroke="url(#ggAccent)" stroke-width="1.5"/>
+          <!-- fan 1 -->
+          <circle cx="38" cy="37" r="24" fill="none" stroke="#2a2a3e" stroke-width=".7"/>
+          <circle cx="38" cy="37" r="16" fill="none" stroke="#252538" stroke-width=".4"/>
+          <circle cx="38" cy="37" r="5" fill="none" stroke="#333" stroke-width=".8"/>
+          <circle cx="38" cy="37" r="2" fill="#0073DF" opacity=".15"/>
+          <path d="M38 13C32 20,30 27,34 33C36 36,40 36,42 33C46 27,44 20,38 13Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M62 37C55 31,48 29,42 33C40 36,40 38,42 41C48 45,55 43,62 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M38 61C44 54,46 47,42 41C40 38,36 38,34 41C30 47,32 54,38 61Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M14 37C21 43,28 45,34 41C36 38,36 36,34 33C28 29,21 31,14 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <!-- fan 2 -->
+          <circle cx="100" cy="37" r="24" fill="none" stroke="#2a2a3e" stroke-width=".7"/>
+          <circle cx="100" cy="37" r="16" fill="none" stroke="#252538" stroke-width=".4"/>
+          <circle cx="100" cy="37" r="5" fill="none" stroke="#333" stroke-width=".8"/>
+          <circle cx="100" cy="37" r="2" fill="#0073DF" opacity=".15"/>
+          <path d="M100 13C94 20,92 27,96 33C98 36,102 36,104 33C108 27,106 20,100 13Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M124 37C117 31,110 29,104 33C102 36,102 38,104 41C110 45,117 43,124 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M100 61C106 54,108 47,104 41C102 38,98 38,96 41C92 47,94 54,100 61Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M76 37C83 43,90 45,96 41C98 38,98 36,96 33C90 29,83 31,76 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <!-- fan 3 -->
+          <circle cx="162" cy="37" r="24" fill="none" stroke="#2a2a3e" stroke-width=".7"/>
+          <circle cx="162" cy="37" r="16" fill="none" stroke="#252538" stroke-width=".4"/>
+          <circle cx="162" cy="37" r="5" fill="none" stroke="#333" stroke-width=".8"/>
+          <circle cx="162" cy="37" r="2" fill="#0073DF" opacity=".15"/>
+          <path d="M162 13C156 20,154 27,158 33C160 36,164 36,166 33C170 27,168 20,162 13Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M186 37C179 31,172 29,166 33C164 36,164 38,166 41C172 45,179 43,186 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M162 61C168 54,170 47,166 41C164 38,160 38,158 41C154 47,156 54,162 61Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <path d="M138 37C145 43,152 45,158 41C160 38,160 36,158 33C152 29,145 31,138 37Z" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <!-- backplate -->
+          <rect x="8" y="72" width="80" height="12" rx="2" fill="#18182a" stroke="#2a2a3e" stroke-width=".6"/>
+          <!-- power connector -->
+          <rect x="170" y="72" width="18" height="12" rx="2" fill="none" stroke="#444" stroke-width=".6"/>
+          <circle cx="175" cy="78" r="1.2" fill="#555"/><circle cx="180" cy="78" r="1.2" fill="#555"/><circle cx="185" cy="78" r="1.2" fill="#555"/>
+        </svg>
+        <div class="explode-label" style="right:220px;top:50%;transform:translateY(-50%);text-align:right">RTX 4090<span class="spec">24GB GDDR6X | 450W TDP</span></div>
       </div>
 
       <!-- CPU -->
-      <div class="explode-part" id="part-cpu" style="left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 90 90" fill="none">
-          <defs><linearGradient id="gcp" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#2a2a3e"/><stop offset="100%" stop-color="#1a1a2e"/></linearGradient></defs>
-          <rect x="14" y="14" width="62" height="62" rx="3" fill="url(#gcp)" stroke="#0073DF" stroke-width="1.5"/>
-          <rect x="22" y="22" width="46" height="46" rx="2" fill="none" stroke="#444" stroke-width=".8"/>
-          <text x="45" y="50" text-anchor="middle" fill="#0073DF" font-size="7" font-family="Inter" opacity=".5">i9</text>
-          <line x1="20" y1="8" x2="20" y2="14" stroke="#555" stroke-width=".8"/><line x1="28" y1="8" x2="28" y2="14" stroke="#555" stroke-width=".8"/><line x1="36" y1="8" x2="36" y2="14" stroke="#555" stroke-width=".8"/><line x1="44" y1="8" x2="44" y2="14" stroke="#555" stroke-width=".8"/><line x1="52" y1="8" x2="52" y2="14" stroke="#555" stroke-width=".8"/><line x1="60" y1="8" x2="60" y2="14" stroke="#555" stroke-width=".8"/><line x1="68" y1="8" x2="68" y2="14" stroke="#555" stroke-width=".8"/>
-          <line x1="20" y1="76" x2="20" y2="82" stroke="#555" stroke-width=".8"/><line x1="28" y1="76" x2="28" y2="82" stroke="#555" stroke-width=".8"/><line x1="36" y1="76" x2="36" y2="82" stroke="#555" stroke-width=".8"/><line x1="44" y1="76" x2="44" y2="82" stroke="#555" stroke-width=".8"/><line x1="52" y1="76" x2="52" y2="82" stroke="#555" stroke-width=".8"/><line x1="60" y1="76" x2="60" y2="82" stroke="#555" stroke-width=".8"/><line x1="68" y1="76" x2="68" y2="82" stroke="#555" stroke-width=".8"/>
-          <line x1="8" y1="20" x2="14" y2="20" stroke="#555" stroke-width=".8"/><line x1="8" y1="28" x2="14" y2="28" stroke="#555" stroke-width=".8"/><line x1="8" y1="36" x2="14" y2="36" stroke="#555" stroke-width=".8"/><line x1="8" y1="44" x2="14" y2="44" stroke="#555" stroke-width=".8"/><line x1="8" y1="52" x2="14" y2="52" stroke="#555" stroke-width=".8"/><line x1="8" y1="60" x2="14" y2="60" stroke="#555" stroke-width=".8"/><line x1="8" y1="68" x2="14" y2="68" stroke="#555" stroke-width=".8"/>
-          <line x1="76" y1="20" x2="82" y2="20" stroke="#555" stroke-width=".8"/><line x1="76" y1="28" x2="82" y2="28" stroke="#555" stroke-width=".8"/><line x1="76" y1="36" x2="82" y2="36" stroke="#555" stroke-width=".8"/><line x1="76" y1="44" x2="82" y2="44" stroke="#555" stroke-width=".8"/><line x1="76" y1="52" x2="82" y2="52" stroke="#555" stroke-width=".8"/><line x1="76" y1="60" x2="82" y2="60" stroke="#555" stroke-width=".8"/><line x1="76" y1="68" x2="82" y2="68" stroke="#555" stroke-width=".8"/>
+      <div class="explode-part" id="part-cpu" style="left:50%;top:50%;width:85px;height:85px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 85 85" fill="none">
+          <defs><linearGradient id="gcp" x1="0" y1="0" x2="85" y2="85" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#282840"/><stop offset="100%" stop-color="#18182a"/></linearGradient></defs>
+          <!-- IHS -->
+          <rect x="12" y="12" width="61" height="61" rx="3" fill="url(#gcp)" stroke="#555" stroke-width="1.2"/>
+          <rect x="18" y="18" width="49" height="49" rx="2" fill="none" stroke="#3a3a50" stroke-width=".8"/>
+          <!-- die mark -->
+          <rect x="28" y="28" width="29" height="29" rx="1" fill="none" stroke="#0073DF" stroke-width=".5" opacity=".25"/>
+          <text x="42.5" y="46" text-anchor="middle" fill="#0073DF" font-size="7" font-family="Inter,sans-serif" font-weight="600" opacity=".4">i9</text>
+          <!-- pins (all four sides) -->
+          <line x1="18" y1="7" x2="18" y2="12" stroke="#444" stroke-width=".7"/><line x1="25" y1="7" x2="25" y2="12" stroke="#444" stroke-width=".7"/><line x1="32" y1="7" x2="32" y2="12" stroke="#444" stroke-width=".7"/><line x1="39" y1="7" x2="39" y2="12" stroke="#444" stroke-width=".7"/><line x1="46" y1="7" x2="46" y2="12" stroke="#444" stroke-width=".7"/><line x1="53" y1="7" x2="53" y2="12" stroke="#444" stroke-width=".7"/><line x1="60" y1="7" x2="60" y2="12" stroke="#444" stroke-width=".7"/><line x1="67" y1="7" x2="67" y2="12" stroke="#444" stroke-width=".7"/>
+          <line x1="18" y1="73" x2="18" y2="78" stroke="#444" stroke-width=".7"/><line x1="25" y1="73" x2="25" y2="78" stroke="#444" stroke-width=".7"/><line x1="32" y1="73" x2="32" y2="78" stroke="#444" stroke-width=".7"/><line x1="39" y1="73" x2="39" y2="78" stroke="#444" stroke-width=".7"/><line x1="46" y1="73" x2="46" y2="78" stroke="#444" stroke-width=".7"/><line x1="53" y1="73" x2="53" y2="78" stroke="#444" stroke-width=".7"/><line x1="60" y1="73" x2="60" y2="78" stroke="#444" stroke-width=".7"/><line x1="67" y1="73" x2="67" y2="78" stroke="#444" stroke-width=".7"/>
+          <line x1="7" y1="18" x2="12" y2="18" stroke="#444" stroke-width=".7"/><line x1="7" y1="25" x2="12" y2="25" stroke="#444" stroke-width=".7"/><line x1="7" y1="32" x2="12" y2="32" stroke="#444" stroke-width=".7"/><line x1="7" y1="39" x2="12" y2="39" stroke="#444" stroke-width=".7"/><line x1="7" y1="46" x2="12" y2="46" stroke="#444" stroke-width=".7"/><line x1="7" y1="53" x2="12" y2="53" stroke="#444" stroke-width=".7"/><line x1="7" y1="60" x2="12" y2="60" stroke="#444" stroke-width=".7"/><line x1="7" y1="67" x2="12" y2="67" stroke="#444" stroke-width=".7"/>
+          <line x1="73" y1="18" x2="78" y2="18" stroke="#444" stroke-width=".7"/><line x1="73" y1="25" x2="78" y2="25" stroke="#444" stroke-width=".7"/><line x1="73" y1="32" x2="78" y2="32" stroke="#444" stroke-width=".7"/><line x1="73" y1="39" x2="78" y2="39" stroke="#444" stroke-width=".7"/><line x1="73" y1="46" x2="78" y2="46" stroke="#444" stroke-width=".7"/><line x1="73" y1="53" x2="78" y2="53" stroke="#444" stroke-width=".7"/><line x1="73" y1="60" x2="78" y2="60" stroke="#444" stroke-width=".7"/><line x1="73" y1="67" x2="78" y2="67" stroke="#444" stroke-width=".7"/>
         </svg>
-        <div class="explode-label" style="left:50%;bottom:-28px;transform:translateX(-50%)">Intel Core i9-14900K <span class="spec">— 24 Cores</span></div>
+        <div class="explode-label" style="left:50%;bottom:-32px;transform:translateX(-50%)">Intel Core i9-14900K<span class="spec">24 Cores | 6.0 GHz Boost</span></div>
+      </div>
+
+      <!-- AIO COOLER (radiator + pump) -->
+      <div class="explode-part" id="part-cooler" style="left:50%;top:50%;width:160px;height:70px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 160 70" fill="none">
+          <defs><linearGradient id="gco" x1="0" y1="0" x2="160" y2="70" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#151525"/><stop offset="100%" stop-color="#1e1e30"/></linearGradient></defs>
+          <!-- radiator body -->
+          <rect x="3" y="3" width="154" height="50" rx="4" fill="url(#gco)" stroke="#2a2a40" stroke-width="1"/>
+          <!-- fins -->
+          <line x1="12" y1="8" x2="12" y2="48" stroke="#222238" stroke-width=".5"/><line x1="18" y1="8" x2="18" y2="48" stroke="#222238" stroke-width=".5"/><line x1="24" y1="8" x2="24" y2="48" stroke="#222238" stroke-width=".5"/><line x1="30" y1="8" x2="30" y2="48" stroke="#222238" stroke-width=".5"/><line x1="36" y1="8" x2="36" y2="48" stroke="#222238" stroke-width=".5"/><line x1="42" y1="8" x2="42" y2="48" stroke="#222238" stroke-width=".5"/><line x1="48" y1="8" x2="48" y2="48" stroke="#222238" stroke-width=".5"/><line x1="54" y1="8" x2="54" y2="48" stroke="#222238" stroke-width=".5"/><line x1="60" y1="8" x2="60" y2="48" stroke="#222238" stroke-width=".5"/><line x1="66" y1="8" x2="66" y2="48" stroke="#222238" stroke-width=".5"/><line x1="72" y1="8" x2="72" y2="48" stroke="#222238" stroke-width=".5"/><line x1="78" y1="8" x2="78" y2="48" stroke="#222238" stroke-width=".5"/><line x1="84" y1="8" x2="84" y2="48" stroke="#222238" stroke-width=".5"/><line x1="90" y1="8" x2="90" y2="48" stroke="#222238" stroke-width=".5"/><line x1="96" y1="8" x2="96" y2="48" stroke="#222238" stroke-width=".5"/><line x1="102" y1="8" x2="102" y2="48" stroke="#222238" stroke-width=".5"/><line x1="108" y1="8" x2="108" y2="48" stroke="#222238" stroke-width=".5"/><line x1="114" y1="8" x2="114" y2="48" stroke="#222238" stroke-width=".5"/><line x1="120" y1="8" x2="120" y2="48" stroke="#222238" stroke-width=".5"/><line x1="126" y1="8" x2="126" y2="48" stroke="#222238" stroke-width=".5"/><line x1="132" y1="8" x2="132" y2="48" stroke="#222238" stroke-width=".5"/><line x1="138" y1="8" x2="138" y2="48" stroke="#222238" stroke-width=".5"/><line x1="144" y1="8" x2="144" y2="48" stroke="#222238" stroke-width=".5"/><line x1="150" y1="8" x2="150" y2="48" stroke="#222238" stroke-width=".5"/>
+          <!-- hose connections -->
+          <circle cx="20" cy="58" r="6" fill="#151525" stroke="#333" stroke-width=".8"/>
+          <circle cx="20" cy="58" r="3" fill="none" stroke="#444" stroke-width=".5"/>
+          <circle cx="140" cy="58" r="6" fill="#151525" stroke="#333" stroke-width=".8"/>
+          <circle cx="140" cy="58" r="3" fill="none" stroke="#444" stroke-width=".5"/>
+          <!-- hoses -->
+          <path d="M26 58C40 66,50 68,80 68" stroke="#2a2a3e" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M134 58C120 66,110 68,80 68" stroke="#2a2a3e" stroke-width="3" stroke-linecap="round" fill="none"/>
+        </svg>
+        <div class="explode-label" style="right:180px;top:50%;transform:translateY(-50%);text-align:right">360mm AIO<span class="spec">Liquid Cooled | 3x 120mm</span></div>
       </div>
 
       <!-- RAM 1 -->
-      <div class="explode-part" id="part-ram1" style="left:50%;top:50%;width:130px;height:36px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 130 36" fill="none">
-          <defs><linearGradient id="gr" x1="0" y1="0" x2="130" y2="36" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="3" y="3" width="124" height="24" rx="3" fill="url(#gr)" stroke="#0073DF" stroke-width="1.5"/>
-          <rect x="10" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="26" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="42" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="58" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="74" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="90" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="106" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <line x1="18" y1="27" x2="18" y2="33" stroke="#555" stroke-width=".6"/><line x1="38" y1="27" x2="38" y2="33" stroke="#555" stroke-width=".6"/><line x1="58" y1="27" x2="58" y2="33" stroke="#555" stroke-width=".6"/><line x1="78" y1="27" x2="78" y2="33" stroke="#555" stroke-width=".6"/><line x1="98" y1="27" x2="98" y2="33" stroke="#555" stroke-width=".6"/>
-          <line x1="3" y1="3" x2="127" y2="3" stroke="#0073DF" stroke-width=".3" opacity=".35"/>
+      <div class="explode-part" id="part-ram1" style="left:50%;top:50%;width:120px;height:38px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 120 38" fill="none">
+          <defs><linearGradient id="gr" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#151525"/><stop offset="100%" stop-color="#1e1e30"/></linearGradient>
+          <linearGradient id="grLed" x1="0" y1="0" x2="120" y2="0" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#0073DF" stop-opacity=".3"/><stop offset="50%" stop-color="#4da6ff" stop-opacity=".4"/><stop offset="100%" stop-color="#0073DF" stop-opacity=".2"/></linearGradient></defs>
+          <!-- LED bar top -->
+          <rect x="8" y="2" width="104" height="4" rx="2" fill="url(#grLed)" opacity=".6"/>
+          <!-- PCB -->
+          <rect x="3" y="6" width="114" height="24" rx="3" fill="url(#gr)" stroke="#2a2a40" stroke-width="1"/>
+          <!-- chips -->
+          <rect x="10" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="24" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="38" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="52" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="66" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="80" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="94" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <!-- contact pins -->
+          <line x1="16" y1="30" x2="16" y2="35" stroke="#555" stroke-width=".5"/><line x1="30" y1="30" x2="30" y2="35" stroke="#555" stroke-width=".5"/><line x1="44" y1="30" x2="44" y2="35" stroke="#555" stroke-width=".5"/><line x1="58" y1="30" x2="58" y2="35" stroke="#555" stroke-width=".5"/><line x1="72" y1="30" x2="72" y2="35" stroke="#555" stroke-width=".5"/><line x1="86" y1="30" x2="86" y2="35" stroke="#555" stroke-width=".5"/><line x1="100" y1="30" x2="100" y2="35" stroke="#555" stroke-width=".5"/>
         </svg>
       </div>
 
       <!-- RAM 2 -->
-      <div class="explode-part" id="part-ram2" style="left:50%;top:50%;width:130px;height:36px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 130 36" fill="none">
-          <rect x="3" y="3" width="124" height="24" rx="3" fill="url(#gr)" stroke="#0073DF" stroke-width="1.5"/>
-          <rect x="10" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="26" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="42" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="58" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="74" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="90" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/><rect x="106" y="7" width="12" height="16" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <line x1="18" y1="27" x2="18" y2="33" stroke="#555" stroke-width=".6"/><line x1="38" y1="27" x2="38" y2="33" stroke="#555" stroke-width=".6"/><line x1="58" y1="27" x2="58" y2="33" stroke="#555" stroke-width=".6"/><line x1="78" y1="27" x2="78" y2="33" stroke="#555" stroke-width=".6"/><line x1="98" y1="27" x2="98" y2="33" stroke="#555" stroke-width=".6"/>
-          <line x1="3" y1="3" x2="127" y2="3" stroke="#0073DF" stroke-width=".3" opacity=".35"/>
+      <div class="explode-part" id="part-ram2" style="left:50%;top:50%;width:120px;height:38px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 120 38" fill="none">
+          <rect x="8" y="2" width="104" height="4" rx="2" fill="url(#grLed)" opacity=".6"/>
+          <rect x="3" y="6" width="114" height="24" rx="3" fill="url(#gr)" stroke="#2a2a40" stroke-width="1"/>
+          <rect x="10" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="24" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="38" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="52" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="66" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="80" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/><rect x="94" y="10" width="10" height="16" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <line x1="16" y1="30" x2="16" y2="35" stroke="#555" stroke-width=".5"/><line x1="30" y1="30" x2="30" y2="35" stroke="#555" stroke-width=".5"/><line x1="44" y1="30" x2="44" y2="35" stroke="#555" stroke-width=".5"/><line x1="58" y1="30" x2="58" y2="35" stroke="#555" stroke-width=".5"/><line x1="72" y1="30" x2="72" y2="35" stroke="#555" stroke-width=".5"/><line x1="86" y1="30" x2="86" y2="35" stroke="#555" stroke-width=".5"/><line x1="100" y1="30" x2="100" y2="35" stroke="#555" stroke-width=".5"/>
         </svg>
-        <div class="explode-label" style="left:150px;top:50%;transform:translateY(-50%)">64GB DDR5 <span class="spec">— 5600MHz</span></div>
+        <div class="explode-label" style="left:140px;top:50%;transform:translateY(-50%)">64GB DDR5<span class="spec">5600MHz | RGB</span></div>
       </div>
 
       <!-- MOTHERBOARD -->
-      <div class="explode-part" id="part-mobo" style="left:50%;top:50%;width:180px;height:180px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 180 180" fill="none">
-          <defs><linearGradient id="gm" x1="0" y1="0" x2="180" y2="180" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="4" y="4" width="172" height="172" rx="3" fill="url(#gm)" stroke="#0073DF" stroke-width="1.5"/>
-          <circle cx="12" cy="12" r="3" fill="none" stroke="#444" stroke-width=".7"/><circle cx="168" cy="12" r="3" fill="none" stroke="#444" stroke-width=".7"/><circle cx="12" cy="168" r="3" fill="none" stroke="#444" stroke-width=".7"/><circle cx="168" cy="168" r="3" fill="none" stroke="#444" stroke-width=".7"/>
-          <rect x="52" y="34" width="54" height="54" rx="2" fill="none" stroke="#555" stroke-width="1.2"/>
-          <rect x="60" y="42" width="38" height="38" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="126" y="30" width="9" height="62" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="140" y="30" width="9" height="62" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="26" y="108" width="108" height="9" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="26" y="124" width="108" height="7" rx="1" fill="none" stroke="#3a3a4e" stroke-width=".6"/>
-          <rect x="26" y="138" width="108" height="9" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="126" y="126" width="26" height="26" rx="2" fill="none" stroke="#444" stroke-width=".7"/>
-          <text x="139" y="143" text-anchor="middle" fill="#444" font-size="5.5" font-family="Inter">Z790</text>
-          <rect x="10" y="26" width="30" height="36" rx="2" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="154" y="108" width="14" height="36" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
-          <line x1="79" y1="88" x2="79" y2="108" stroke="#333" stroke-width=".4"/><line x1="79" y1="88" x2="126" y2="60" stroke="#333" stroke-width=".4"/>
+      <div class="explode-part" id="part-mobo" style="left:50%;top:50%;width:190px;height:190px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 190 190" fill="none">
+          <defs><linearGradient id="gm" x1="0" y1="0" x2="190" y2="190" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#141422"/><stop offset="100%" stop-color="#1c1c2e"/></linearGradient></defs>
+          <!-- PCB -->
+          <rect x="4" y="4" width="182" height="182" rx="3" fill="url(#gm)" stroke="#2a2a40" stroke-width="1.2"/>
+          <!-- mounting holes -->
+          <circle cx="12" cy="12" r="3" fill="#0e0e18" stroke="#333" stroke-width=".6"/><circle cx="178" cy="12" r="3" fill="#0e0e18" stroke="#333" stroke-width=".6"/><circle cx="12" cy="178" r="3" fill="#0e0e18" stroke="#333" stroke-width=".6"/><circle cx="178" cy="178" r="3" fill="#0e0e18" stroke="#333" stroke-width=".6"/><circle cx="95" cy="95" r="3" fill="#0e0e18" stroke="#333" stroke-width=".6"/>
+          <!-- CPU socket -->
+          <rect x="50" y="32" width="58" height="58" rx="2" fill="none" stroke="#444" stroke-width="1"/>
+          <rect x="56" y="38" width="46" height="46" rx="1" fill="none" stroke="#333" stroke-width=".6"/>
+          <!-- DIMM slots -->
+          <rect x="128" y="28" width="8" height="66" rx="1" fill="none" stroke="#333" stroke-width=".6"/>
+          <rect x="140" y="28" width="8" height="66" rx="1" fill="none" stroke="#333" stroke-width=".6"/>
+          <rect x="152" y="28" width="8" height="66" rx="1" fill="none" stroke="#333" stroke-width=".6"/>
+          <rect x="164" y="28" width="8" height="66" rx="1" fill="none" stroke="#333" stroke-width=".6"/>
+          <!-- PCIe slots -->
+          <rect x="24" y="110" width="120" height="10" rx="1.5" fill="none" stroke="#444" stroke-width=".7"/>
+          <rect x="24" y="126" width="120" height="8" rx="1" fill="none" stroke="#2a2a3e" stroke-width=".5"/>
+          <rect x="24" y="140" width="120" height="10" rx="1.5" fill="none" stroke="#333" stroke-width=".5"/>
+          <!-- chipset heatsink -->
+          <rect x="140" y="130" width="28" height="28" rx="3" fill="#1a1a2e" stroke="#333" stroke-width=".7"/>
+          <text x="154" y="148" text-anchor="middle" fill="#444" font-size="5.5" font-family="Inter,sans-serif">Z790</text>
+          <!-- VRM heatsink -->
+          <rect x="10" y="24" width="32" height="42" rx="2" fill="#1a1a2e" stroke="#333" stroke-width=".6"/>
+          <line x1="14" y1="28" x2="14" y2="62" stroke="#252538" stroke-width=".4"/><line x1="20" y1="28" x2="20" y2="62" stroke="#252538" stroke-width=".4"/><line x1="26" y1="28" x2="26" y2="62" stroke="#252538" stroke-width=".4"/><line x1="32" y1="28" x2="32" y2="62" stroke="#252538" stroke-width=".4"/><line x1="38" y1="28" x2="38" y2="62" stroke="#252538" stroke-width=".4"/>
+          <!-- M.2 slot -->
+          <rect x="50" y="160" width="56" height="10" rx="1" fill="none" stroke="#333" stroke-width=".5"/>
+          <!-- rear I/O shield -->
+          <rect x="4" y="4" width="8" height="80" rx="1" fill="#18182a" stroke="#2a2a3e" stroke-width=".4"/>
+          <!-- SATA ports -->
+          <rect x="160" y="110" width="14" height="8" rx="1" fill="none" stroke="#333" stroke-width=".5"/>
+          <rect x="160" y="122" width="14" height="8" rx="1" fill="none" stroke="#333" stroke-width=".5"/>
+          <!-- trace lines -->
+          <line x1="79" y1="90" x2="79" y2="110" stroke="#1e1e30" stroke-width=".3"/><line x1="79" y1="90" x2="128" y2="60" stroke="#1e1e30" stroke-width=".3"/><line x1="108" y1="61" x2="128" y2="61" stroke="#1e1e30" stroke-width=".3"/>
+          <!-- accent LED strip -->
+          <line x1="4" y1="186" x2="186" y2="186" stroke="#0073DF" stroke-width=".6" opacity=".2"/>
         </svg>
-        <div class="explode-label" style="left:50%;top:196px;transform:translateX(-50%)">ROG Strix Z790 <span class="spec">— LGA 1700</span></div>
+        <div class="explode-label" style="left:50%;top:206px;transform:translateX(-50%)">ROG Strix Z790-E<span class="spec">LGA 1700 | Wi-Fi 6E</span></div>
       </div>
 
-      <!-- COOLING FAN -->
-      <div class="explode-part" id="part-fan" style="left:50%;top:50%;width:100px;height:100px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 100 100" fill="none">
-          <defs><linearGradient id="gf" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="4" y="4" width="92" height="92" rx="5" fill="url(#gf)" stroke="#0073DF" stroke-width="1.5"/>
-          <circle cx="50" cy="50" r="38" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <circle cx="50" cy="50" r="9" fill="none" stroke="#444" stroke-width="1.2"/>
-          <circle cx="50" cy="50" r="3.5" fill="#0073DF" opacity=".25"/>
-          <path d="M50 12C42 22,38 30,44 40C47 44,53 44,56 40C62 30,58 22,50 12Z" fill="none" stroke="#444" stroke-width=".6"/>
-          <path d="M88 50C78 42,68 38,60 44C56 47,56 53,60 56C68 62,78 58,88 50Z" fill="none" stroke="#444" stroke-width=".6"/>
-          <path d="M50 88C58 78,62 68,56 60C53 56,47 56,44 60C38 68,42 78,50 88Z" fill="none" stroke="#444" stroke-width=".6"/>
-          <path d="M12 50C22 58,30 62,40 56C44 53,44 47,40 44C30 38,22 42,12 50Z" fill="none" stroke="#444" stroke-width=".6"/>
-          <circle cx="10" cy="10" r="2.5" fill="none" stroke="#444" stroke-width=".5"/><circle cx="90" cy="10" r="2.5" fill="none" stroke="#444" stroke-width=".5"/><circle cx="10" cy="90" r="2.5" fill="none" stroke="#444" stroke-width=".5"/><circle cx="90" cy="90" r="2.5" fill="none" stroke="#444" stroke-width=".5"/>
+      <!-- CASE FAN (rear exhaust) -->
+      <div class="explode-part" id="part-fan" style="left:50%;top:50%;width:90px;height:90px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 90 90" fill="none">
+          <defs><linearGradient id="gf" x1="0" y1="0" x2="90" y2="90" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#141422"/><stop offset="100%" stop-color="#1c1c2e"/></linearGradient></defs>
+          <rect x="3" y="3" width="84" height="84" rx="4" fill="url(#gf)" stroke="#2a2a40" stroke-width="1"/>
+          <circle cx="45" cy="45" r="35" fill="none" stroke="#222238" stroke-width=".6"/>
+          <circle cx="45" cy="45" r="8" fill="none" stroke="#333" stroke-width=".9"/>
+          <circle cx="45" cy="45" r="3" fill="#0073DF" opacity=".15"/>
+          <!-- blades -->
+          <path d="M45 10C38 19,36 26,40 35C42 38,48 38,50 35C54 26,52 19,45 10Z" fill="#1a1a2e" stroke="#2a2a3e" stroke-width=".5"/>
+          <path d="M80 45C71 38,64 36,55 40C52 42,52 48,55 50C64 54,71 52,80 45Z" fill="#1a1a2e" stroke="#2a2a3e" stroke-width=".5"/>
+          <path d="M45 80C52 71,54 64,50 55C48 52,42 52,40 55C36 64,38 71,45 80Z" fill="#1a1a2e" stroke="#2a2a3e" stroke-width=".5"/>
+          <path d="M10 45C19 52,26 54,35 50C38 48,38 42,35 40C26 36,19 38,10 45Z" fill="#1a1a2e" stroke="#2a2a3e" stroke-width=".5"/>
+          <!-- corner mounts -->
+          <circle cx="9" cy="9" r="2.5" fill="#0e0e18" stroke="#333" stroke-width=".4"/><circle cx="81" cy="9" r="2.5" fill="#0e0e18" stroke="#333" stroke-width=".4"/><circle cx="9" cy="81" r="2.5" fill="#0e0e18" stroke="#333" stroke-width=".4"/><circle cx="81" cy="81" r="2.5" fill="#0e0e18" stroke="#333" stroke-width=".4"/>
         </svg>
-        <div class="explode-label" style="right:120px;top:50%;transform:translateY(-50%);text-align:right">360mm AIO <span class="spec">— Liquid Cooled</span></div>
+        <div class="explode-label" style="left:110px;top:50%;transform:translateY(-50%)">120mm Fan<span class="spec">1800 RPM | PWM</span></div>
       </div>
 
-      <!-- SSD -->
-      <div class="explode-part" id="part-ssd" style="left:50%;top:50%;width:110px;height:44px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 110 44" fill="none">
-          <defs><linearGradient id="gs" x1="0" y1="0" x2="110" y2="44" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="3" y="3" width="104" height="38" rx="5" fill="url(#gs)" stroke="#0073DF" stroke-width="1.5"/>
-          <rect x="10" y="9" width="20" height="12" rx="1.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="34" y="9" width="20" height="12" rx="1.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="58" y="9" width="20" height="12" rx="1.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <rect x="82" y="9" width="16" height="12" rx="1.5" fill="none" stroke="#555" stroke-width=".7"/>
-          <text x="55" y="36" text-anchor="middle" fill="#444" font-size="6" font-family="Inter">990 PRO</text>
-          <rect x="10" y="26" width="28" height="5" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
+      <!-- SSD (M.2 NVMe) -->
+      <div class="explode-part" id="part-ssd" style="left:50%;top:50%;width:110px;height:32px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 110 32" fill="none">
+          <defs><linearGradient id="gs" x1="0" y1="0" x2="110" y2="32" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#151525"/><stop offset="100%" stop-color="#1e1e30"/></linearGradient></defs>
+          <!-- PCB -->
+          <rect x="3" y="3" width="104" height="26" rx="3" fill="url(#gs)" stroke="#2a2a40" stroke-width="1"/>
+          <!-- NAND chips -->
+          <rect x="10" y="7" width="16" height="10" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <rect x="30" y="7" width="16" height="10" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <rect x="50" y="7" width="16" height="10" rx="1" fill="#1a1a2e" stroke="#333" stroke-width=".5"/>
+          <!-- controller -->
+          <rect x="74" y="6" width="14" height="14" rx="1.5" fill="#1a1a2e" stroke="#444" stroke-width=".6"/>
+          <text x="81" y="15" text-anchor="middle" fill="#555" font-size="3.5" font-family="Inter,sans-serif">CTRL</text>
+          <!-- label -->
+          <rect x="92" y="8" width="10" height="8" rx="1" fill="none" stroke="#CC0000" stroke-width=".5" opacity=".4"/>
+          <!-- connector notch -->
+          <rect x="3" y="20" width="8" height="6" rx="1" fill="#0e0e18" stroke="#333" stroke-width=".4"/>
+          <text x="55" y="28" text-anchor="middle" fill="#333" font-size="4" font-family="Inter,sans-serif">990 PRO</text>
         </svg>
-        <div class="explode-label" style="left:130px;top:50%;transform:translateY(-50%)">Samsung 990 PRO <span class="spec">— 2TB NVMe</span></div>
+        <div class="explode-label" style="left:130px;top:50%;transform:translateY(-50%)">Samsung 990 PRO<span class="spec">2TB NVMe Gen4</span></div>
       </div>
 
       <!-- PSU -->
-      <div class="explode-part" id="part-psu" style="left:50%;top:50%;width:150px;height:80px;transform:translate(-50%,-50%)">
-        <svg viewBox="0 0 150 80" fill="none">
-          <defs><linearGradient id="gp" x1="0" y1="0" x2="150" y2="80" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#1a1a2e"/><stop offset="100%" stop-color="#2a2a3e"/></linearGradient></defs>
-          <rect x="3" y="3" width="144" height="74" rx="4" fill="url(#gp)" stroke="#0073DF" stroke-width="1.5"/>
-          <circle cx="48" cy="40" r="27" fill="none" stroke="#3a3a4e" stroke-width=".8"/>
-          <circle cx="48" cy="40" r="18" fill="none" stroke="#333" stroke-width=".4"/>
-          <circle cx="48" cy="40" r="9" fill="none" stroke="#333" stroke-width=".4"/>
-          <circle cx="48" cy="40" r="3.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <line x1="21" y1="40" x2="75" y2="40" stroke="#333" stroke-width=".4"/><line x1="48" y1="13" x2="48" y2="67" stroke="#333" stroke-width=".4"/>
-          <line x1="29" y1="21" x2="67" y2="59" stroke="#333" stroke-width=".3"/><line x1="29" y1="59" x2="67" y2="21" stroke="#333" stroke-width=".3"/>
-          <rect x="92" y="14" width="44" height="24" rx="2.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <text x="114" y="30" text-anchor="middle" fill="#444" font-size="6.5" font-family="Inter">1000W</text>
-          <rect x="100" y="50" width="14" height="9" rx="1.5" fill="none" stroke="#444" stroke-width=".6"/>
-          <circle cx="104" cy="55" r="1.5" fill="#CC0000" opacity=".4"/>
-          <rect x="120" y="50" width="10" height="9" rx="1" fill="none" stroke="#444" stroke-width=".6"/>
+      <div class="explode-part" id="part-psu" style="left:50%;top:50%;width:155px;height:82px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 155 82" fill="none">
+          <defs><linearGradient id="gp" x1="0" y1="0" x2="155" y2="82" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#141422"/><stop offset="100%" stop-color="#1c1c2e"/></linearGradient></defs>
+          <rect x="3" y="3" width="149" height="76" rx="4" fill="url(#gp)" stroke="#2a2a40" stroke-width="1.2"/>
+          <!-- fan grille -->
+          <circle cx="48" cy="41" r="28" fill="none" stroke="#222238" stroke-width=".6"/>
+          <circle cx="48" cy="41" r="20" fill="none" stroke="#1e1e30" stroke-width=".4"/>
+          <circle cx="48" cy="41" r="12" fill="none" stroke="#1e1e30" stroke-width=".3"/>
+          <circle cx="48" cy="41" r="4" fill="none" stroke="#333" stroke-width=".5"/>
+          <line x1="20" y1="41" x2="76" y2="41" stroke="#1e1e30" stroke-width=".3"/><line x1="48" y1="13" x2="48" y2="69" stroke="#1e1e30" stroke-width=".3"/>
+          <line x1="28" y1="21" x2="68" y2="61" stroke="#1e1e30" stroke-width=".2"/><line x1="28" y1="61" x2="68" y2="21" stroke="#1e1e30" stroke-width=".2"/>
+          <!-- label area -->
+          <rect x="88" y="12" width="52" height="28" rx="2" fill="none" stroke="#333" stroke-width=".6"/>
+          <text x="114" y="24" text-anchor="middle" fill="#555" font-size="5" font-family="Inter,sans-serif" font-weight="600">CORSAIR</text>
+          <text x="114" y="34" text-anchor="middle" fill="#444" font-size="7" font-family="Inter,sans-serif" font-weight="700">1000W</text>
+          <!-- modular connectors -->
+          <rect x="90" y="50" width="10" height="8" rx="1.5" fill="none" stroke="#444" stroke-width=".5"/>
+          <rect x="104" y="50" width="10" height="8" rx="1.5" fill="none" stroke="#444" stroke-width=".5"/>
+          <rect x="118" y="50" width="10" height="8" rx="1.5" fill="none" stroke="#444" stroke-width=".5"/>
+          <rect x="132" y="50" width="10" height="8" rx="1.5" fill="none" stroke="#444" stroke-width=".5"/>
+          <!-- power switch -->
+          <rect x="90" y="66" width="14" height="6" rx="1" fill="none" stroke="#444" stroke-width=".5"/>
+          <circle cx="94" cy="69" r="1.2" fill="#16a34a" opacity=".4"/>
         </svg>
-        <div class="explode-label" style="left:50%;top:95px;transform:translateX(-50%)">Corsair RM1000x <span class="spec">— 1000W 80+ Platinum</span></div>
+        <div class="explode-label" style="left:50%;top:98px;transform:translateX(-50%)">Corsair RM1000x<span class="spec">1000W | 80+ Platinum | Modular</span></div>
+      </div>
+
+      <!-- CABLES -->
+      <div class="explode-part" id="part-cables" style="left:50%;top:50%;width:100px;height:60px;transform:translate(-50%,-50%)">
+        <svg viewBox="0 0 100 60" fill="none">
+          <!-- 24-pin ATX -->
+          <path d="M10 10C25 8,40 14,55 12C70 10,80 18,90 15" stroke="#2a2a40" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <path d="M10 10C25 8,40 14,55 12C70 10,80 18,90 15" stroke="#333" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+          <!-- 8-pin CPU -->
+          <path d="M15 28C30 32,50 26,70 30C82 32,88 28,95 32" stroke="#2a2a40" stroke-width="3" stroke-linecap="round" fill="none"/>
+          <path d="M15 28C30 32,50 26,70 30C82 32,88 28,95 32" stroke="#333" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+          <!-- PCIe power -->
+          <path d="M8 46C22 42,38 50,55 44C72 38,85 48,95 45" stroke="#2a2a40" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+          <path d="M8 46C22 42,38 50,55 44C72 38,85 48,95 45" stroke="#333" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <!-- connector heads -->
+          <rect x="86" y="10" width="12" height="8" rx="1.5" fill="#1a1a2e" stroke="#444" stroke-width=".6"/>
+          <rect x="90" y="27" width="10" height="7" rx="1.5" fill="#1a1a2e" stroke="#444" stroke-width=".6"/>
+          <rect x="89" y="40" width="11" height="9" rx="1.5" fill="#1a1a2e" stroke="#444" stroke-width=".6"/>
+        </svg>
+        <div class="explode-label" style="right:120px;top:50%;transform:translateY(-50%);text-align:right">Power Cables<span class="spec">Sleeved | Modular</span></div>
       </div>
 
     </div>
@@ -411,10 +573,13 @@ h2.section-heading{font-size:clamp(1.6rem,3.5vw,2.25rem);font-weight:800;text-al
     <!-- Bottom CTA -->
     <div class="hero-bottom-cta" id="heroCta">
       <h2>Build Your Dream PC — Every Part in Stock</h2>
-      <button class="btn-white" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">START CUSTOM BUILD →</button>
+      <button class="btn-white" onclick="document.getElementById('builder').scrollIntoView({behavior:'smooth'})">START CUSTOM BUILD &rarr;</button>
     </div>
 
-    <div class="scroll-hint" id="scrollHint">Scroll to explore</div>
+    <div class="scroll-hint" id="scrollHint">
+      Scroll to explore
+      <span class="scroll-arrow"></span>
+    </div>
   </section>
 </div>
 
@@ -625,45 +790,85 @@ navCenter.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
 const explodeWrapper = document.getElementById('explodeWrapper');
 const scrollHint = document.getElementById('scrollHint');
 const heroCta = document.getElementById('heroCta');
+const heroTitle = document.getElementById('heroTitle');
 
+/* Each part config:
+   tx/ty/tz = translate offset at full explosion
+   rx/ry    = rotation degrees at full explosion
+   delay    = normalised delay (0-1) before this part starts moving (staggered explosion)
+   speed    = how quickly it reaches full offset (parallax depth — lower = "further away", moves less)  */
 const parts = [
-  { id: 'part-case',  tx:0,    ty:0,    tz:-80,  rx:5,   ry:-8,   s:.6  },
-  { id: 'part-gpu',   tx:-260, ty:20,   tz:110,  rx:8,   ry:12,   s:.85 },
-  { id: 'part-cpu',   tx:15,   ty:-190, tz:90,   rx:-12, ry:8,    s:.9  },
-  { id: 'part-ram1',  tx:190,  ty:-150, tz:70,   rx:4,   ry:-18,  s:.75 },
-  { id: 'part-ram2',  tx:230,  ty:-95,  tz:50,   rx:6,   ry:-12,  s:.8  },
-  { id: 'part-mobo',  tx:20,   ty:110,  tz:-110, rx:18,  ry:4,    s:.7  },
-  { id: 'part-fan',   tx:-200, ty:130,  tz:50,   rx:-8,  ry:18,   s:.82 },
-  { id: 'part-ssd',   tx:200,  ty:150,  tz:35,   rx:12,  ry:-8,   s:.88 },
-  { id: 'part-psu',   tx:0,    ty:210,  tz:-35,  rx:-4,  ry:10,   s:.65 },
+  { id:'part-case',    tx:0,    ty:0,    tz:-120, rx:4,   ry:-6,   delay:0,    speed:.55 },
+  { id:'part-glass',   tx:-280, ty:-30,  tz:180,  rx:-3,  ry:22,   delay:0,    speed:.92 },
+  { id:'part-gpu',     tx:-300, ty:60,   tz:140,  rx:6,   ry:14,   delay:.04,  speed:.88 },
+  { id:'part-cpu',     tx:30,   ty:-220, tz:100,  rx:-14, ry:6,    delay:.08,  speed:.82 },
+  { id:'part-cooler',  tx:10,   ty:-280, tz:60,   rx:10,  ry:-4,   delay:.06,  speed:.78 },
+  { id:'part-ram1',    tx:240,  ty:-180, tz:80,   rx:3,   ry:-20,  delay:.1,   speed:.75 },
+  { id:'part-ram2',    tx:280,  ty:-110, tz:55,   rx:5,   ry:-16,  delay:.12,  speed:.72 },
+  { id:'part-mobo',    tx:30,   ty:180,  tz:-140, rx:16,  ry:3,    delay:.02,  speed:.65 },
+  { id:'part-fan',     tx:-240, ty:180,  tz:70,   rx:-6,  ry:20,   delay:.14,  speed:.8  },
+  { id:'part-ssd',     tx:260,  ty:200,  tz:45,   rx:10,  ry:-10,  delay:.16,  speed:.85 },
+  { id:'part-psu',     tx:0,    ty:260,  tz:-50,  rx:-5,  ry:8,    delay:.06,  speed:.6  },
+  { id:'part-cables',  tx:-180, ty:-160, tz:40,   rx:-12, ry:-14,  delay:.18,  speed:.9  },
 ];
 
-function ease(t) { return 1 - Math.pow(1 - t, 3); }
+/* Responsive: scale explosion distances on smaller screens */
+const vw = window.innerWidth;
+const explosionScale = vw < 480 ? .4 : vw < 768 ? .55 : vw < 1024 ? .75 : 1;
+
+/* Easing: deceleration curve (cubic ease-out) with slight overshoot */
+function ease(t) {
+  const c = 1.04;
+  return 1 - Math.pow(1 - t, 3) * c + (c - 1) * t;
+}
+
+/* Glow intensity scales with explosion */
+const scene = document.getElementById('explodeScene');
 
 function tick() {
   const rect = explodeWrapper.getBoundingClientRect();
-  const top = window.scrollY + rect.top;
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const wrapperTop = scrollTop + rect.top;
   const range = explodeWrapper.offsetHeight - window.innerHeight;
-  const raw = (window.scrollY - top) / range;
+  if (range <= 0) return;
+  const raw = (scrollTop - wrapperTop) / range;
   const progress = Math.max(0, Math.min(1, raw));
 
-  if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - progress * 5);
-  heroCta.classList.toggle('show', progress > 0.85);
+  /* UI elements */
+  if (scrollHint) scrollHint.style.opacity = Math.max(0, 1 - progress * 6);
+  if (heroTitle) heroTitle.style.opacity = Math.max(0, 1 - progress * 4);
+  heroCta.classList.toggle('show', progress > 0.88);
+
+  /* Ambient glow */
+  if (scene) scene.style.filter = `drop-shadow(0 0 ${progress * 60}px rgba(0,115,223,${progress * .08}))`;
 
   parts.forEach(cfg => {
     const el = document.getElementById(cfg.id);
     if (!el) return;
-    const p = ease(Math.min(1, progress / cfg.s));
-    el.style.transform = `translate(-50%,-50%) translate3d(${cfg.tx * p}px,${cfg.ty * p}px,${cfg.tz * p}px) rotateX(${cfg.rx * p}deg) rotateY(${cfg.ry * p}deg)`;
+
+    /* Staggered + speed-adjusted progress */
+    const adjusted = Math.max(0, (progress - cfg.delay) / (1 - cfg.delay));
+    const p = ease(Math.min(1, adjusted / cfg.speed));
+    const s = explosionScale;
+
+    el.style.transform = `translate(-50%,-50%) translate3d(${cfg.tx * p * s}px,${cfg.ty * p * s}px,${cfg.tz * p * s}px) rotateX(${cfg.rx * p}deg) rotateY(${cfg.ry * p}deg)`;
+
+    /* Labels fade in mid-explosion */
     const label = el.querySelector('.explode-label');
-    if (label) label.style.opacity = Math.min(1, Math.max(0, (progress - 0.25) / 0.35));
+    if (label) {
+      const labelProgress = Math.min(1, Math.max(0, (progress - 0.2) / 0.3));
+      label.style.opacity = labelProgress;
+    }
+
+    /* Subtle glow intensifies per part */
+    el.style.filter = `drop-shadow(0 ${4 + p * 12}px ${24 + p * 30}px rgba(0,115,223,${.08 + p * .12}))`;
   });
 }
 
-let raf = false;
+let ticking = false;
 window.addEventListener('scroll', () => {
-  if (!raf) { requestAnimationFrame(() => { tick(); raf = false; }); raf = true; }
-});
+  if (!ticking) { requestAnimationFrame(() => { tick(); ticking = false; }); ticking = true; }
+}, { passive: true });
 tick();
 
 /* ===== ADD TO CART ===== */
